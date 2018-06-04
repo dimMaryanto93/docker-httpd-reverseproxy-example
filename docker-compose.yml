@@ -1,8 +1,11 @@
 version: '3.6'
 services:
-  httpProxy:
-    image: httpd:2.4
+  proxy-apache2:
+    image: bitnami/apache
     ports:
-    - "80:80"
+      - "80:80"
+      - "8080:8080"
     volumes:
-    - ./httpd.conf:/etc/apache2/sites-enabled/000-default.conf
+      - ./app-client/dist/app-client:/app
+      - ./httpd.conf:/bitnami/apache/conf/vhosts/my_vhost.conf:ro
+    
